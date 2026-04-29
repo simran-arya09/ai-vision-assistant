@@ -1,25 +1,21 @@
 import pyttsx3
 import threading
-import queue
 
-engine = pyttsx3.init()
-engine.setProperty("rate", 165)
-engine.setProperty("volume", 1.0)
+def _speak(text):
+    engine = pyttsx3.init()
 
-speech_queue = queue.Queue()
+    voices = engine.getProperty("voices")
 
-def worker():
-    while True:
-        text = speech_queue.get()
-        if text is None:
-            break
-        engine.say(text)
-        engine.runAndWait()
-        speech_queue.task_done()
+    # Try female voice if available
+    if len(voices) > 1:
+        engine.setProperty("voice", voices[1].id)
 
-thread = threading.Thread(target=worker, daemon=True)
-thread.start()
+    engine.setProperty("rate", 175)
+    engine.setProperty("volume", 1.0)
+
+    engine.say(text)
+    engine.runAndWait()
+    engine.stop()
 
 def speak(text):
-    if speech_queue.empty():
-        speech_queue.put(text)
+    threading.Thread(target=_speak, args=(text,), daemon=True).start()
