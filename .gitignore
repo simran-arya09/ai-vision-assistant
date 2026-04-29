@@ -4,3 +4,10 @@ __pycache__/
 *.png
 *.csv
 *.pyc
+*.png
+*.jpg
+*.jpeg
+*.avi
+*.mp4
+captures/
+recordings/
