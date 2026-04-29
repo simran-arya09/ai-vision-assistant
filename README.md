@@ -67,15 +67,3 @@ README.md
 
 Simran Arya
 
-
-.gitignore Content:
-
-venv/
-__pycache__/
-*.pyc
-*.pt
-
-
-First Commit Message:
-
-Initial AI vision assistant prototype with YOLO detection and voice alerts
